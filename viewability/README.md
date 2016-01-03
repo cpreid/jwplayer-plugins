@@ -1,3 +1,5 @@
+> Allows you to monitor the percent of the video player that is visible on the screen
+
 ### Usage
 ```
 jwplayer("player").setup({
