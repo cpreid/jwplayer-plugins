@@ -1,6 +1,6 @@
 > Allows you to monitor the percent of the video player that is visible on the screen
 
-### Usage
+## Usage
 ```
 jwplayer("player").setup({
     file: 'bunny.mp4',
