@@ -1,6 +1,6 @@
 > The player will resume wherever the user left off the last time they watched the video
 
-### Usage
+## Usage
 ```
 jwplayer("player").setup({
     file: 'bunny.mp4',
