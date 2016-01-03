@@ -1,5 +1,4 @@
-## Usage
-
+### Usage
 ```
 jwplayer("player").setup({
     file: 'bunny.mp4',
