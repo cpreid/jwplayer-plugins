@@ -12,10 +12,18 @@
     })();
 
     var getPosition = function(element) {
-        var bodyRect = document.body.getBoundingClientRect(),
-            elemRect = element.getBoundingClientRect();
-        return {x: elemRect.left - bodyRect.left, y: elemRect.top - bodyRect.top}
-    }
+        var top = 0, left = 0;
+        do {
+            top += element.offsetTop  || 0;
+            left += element.offsetLeft || 0;
+            element = element.offsetParent;
+        } while(element);
+
+        return {
+            x: left,
+            y: top            
+        };
+    };
 
     var measure = function() {
         var elt                 = player.getContainer(),
