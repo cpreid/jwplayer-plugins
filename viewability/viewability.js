@@ -17,35 +17,59 @@
     }
 
     var measure = function() {
-        var elt = player.getContainer(),
-            position = getPosition( elt ),
-            height = player.getHeight(),
-            missingPixels = 0,
-            showing = 0,
-            calculation = 100.00;
+        var elt                 = player.getContainer(),
+            position            = getPosition( elt ),
+            height              = player.getHeight(),
+            width               = player.getWidth(),
+            missingHeightPixels = 0,
+            missingWidthPixels  = 0,
+            showing             = 0,
+            calculation         = 100.00;
 
         // missing from top fold
         if(position.y < 0) {
             if(Math.abs(position.y) >= height) {
-                missingPixels = height;
+                missingHeightPixels = height;
             }
             else {
-                missingPixels += Math.abs(position.y);
+                missingHeightPixels += Math.abs(position.y);
             }
         }
 
         // missing from bottom fold
         if(window.innerHeight - position.y <= height) {
             if(window.innerHeight - position.y < 0) {
-                missingPixels = height;
+                missingHeightPixels = height;
             }
             else {
-                missingPixels += (height - Math.abs(window.innerHeight - position.y));
-            }                
+                missingHeightPixels += (height - Math.abs(window.innerHeight - position.y));
+            }
         }
-        showing = height - missingPixels;
-        showing = showing / height * 100;    
-        return showing;
+
+        // missing from left fold
+        if(position.x < 0) {
+            if(Math.abs(position.x) >= width) {
+                missingWidthPixels = width;
+            }
+            else {
+                missingWidthPixels += Math.abs(position.x);
+            }
+        }
+
+        // missing from right fold
+        if(window.innerWidth - position.x <= width) {
+            if(window.innerWidth - position.x < 0) {
+                missingWidthPixels = width;
+            }
+            else {
+                missingWidthPixels += (width - Math.abs(window.innerWidth - position.x));
+            }
+        }
+
+        return {
+            'x': (width - missingWidthPixels) / width * 100,
+            'y': (height - missingHeightPixels) / height * 100
+        }
     }
 
     player.on('ready', function() {
