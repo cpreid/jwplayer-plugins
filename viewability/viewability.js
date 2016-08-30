@@ -12,8 +12,9 @@
     })();
 
     var getPosition = function(element) {
-        var viewportOffset = element.getBoundingClientRect();
-        return {y: viewportOffset.top, x: viewportOffset.left};    
+        var bodyRect = document.body.getBoundingClientRect(),
+            elemRect = element.getBoundingClientRect();
+        return {x: elemRect.left - bodyRect.left, y: elemRect.top - bodyRect.top}
     }
 
     var measure = function() {
