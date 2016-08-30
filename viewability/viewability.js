@@ -12,18 +12,9 @@
     })();
 
     var getPosition = function(element) {
-        var top = 0, left = 0;
-        do {
-            top += element.offsetTop  || 0;
-            left += element.offsetLeft || 0;
-            element = element.offsetParent;
-        } while(element);
-
-        return {
-            x: left,
-            y: top            
-        };
-    };
+        var viewportOffset = element.getBoundingClientRect();
+        return {y: viewportOffset.top, x: viewportOffset.left};    
+    }
 
     var measure = function() {
         var elt                 = player.getContainer(),
