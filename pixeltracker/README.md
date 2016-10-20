@@ -44,3 +44,16 @@ playerInstance.on('ready', function() {
     });
 });
 ```
+
+### Setup Options
+
+| parameter       | possible values   | default   | notes                                                                                                        | required |
+|-----------------|-------------------|-----------|--------------------------------------------------------------------------------------------------------------|----------|
+| debug           | bool: true, false | false     | log console messages                                                                                         | no       |
+| pixel           | string            | undefined | pixel url                                                                                                    | yes      |
+| evts            | array             | {}        |                                                                                                              | no       |
+| alias           | object            | {}        | specify aliases for each metric/event name - examples:  -- track duration as 'dur' -- track ready as 'init'  | no       |
+| alias.evts      | object            | {}        | provide a mapping of event names to aliases using key/val pairing: -- 'seek': 'skip' -- 'complete': 'finish' | no       |
+| alias.metrics   | object            | {}        | provide a mapping of metric names to aliases using key/val pairing: -- 'muted': 'm' -- 'duration': 'dur'     | no       |
+| addMetrics      | function          | undefined | provide a function to add additional, custom metrics prior to a pixel ping                                   | no       |
+| transformMetric | function          | undefined | provide a function to transform key/value pairs of metrics prior to pixel ping                               | no       |
