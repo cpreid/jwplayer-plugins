@@ -2,6 +2,19 @@
 
 > Allows user to 'drop a pixel' into the player to track playback/user metrics at various playback events
 
+### Metrics tracked
+| Metric     | type   | details                                                    |
+|------------|--------|------------------------------------------------------------|
+| muted      | bool   | is player muted                                            |
+| duration   | float  | duration of video                                          |
+| fullscreen | bool   | is player in fullscreen                                    |
+| height     | str    | pixel width of player, ie, 1280px                          |
+| flash      | bool   | is player using flash                                      |
+| position   | float  | current position of playback                               |
+| state      | string | current status of player: idle, buffering, playing, paused |
+| volume     | int    | volume of player, 1-100                                    |
+| width      | str    | pixel height of player, ie, 720px                          |
+
 ### Basic Usage
 ```
 var playerInstance = jwplayer("player");
