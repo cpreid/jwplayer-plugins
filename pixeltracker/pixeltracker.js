@@ -48,7 +48,7 @@
             fullscreen : function() { return player.getFullscreen(); },
             height     : function() { return player.getHeight(); },
             flash      : function() { return player.getProvider().name.indexOf('flash') > -1; },
-            pos        : function() { return player.getPosition(); },
+            position   : function() { return player.getPosition(); },
             state      : function() { return player.getState(); },
             volume     : function() { return player.getVolume(); },
             width      : function() { return player.getWidth(); }
