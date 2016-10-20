@@ -5,9 +5,8 @@
 ### Basic Usage
 ```
 var playerInstance = jwplayer("player");
-playerInstance.setup({
-    // player setup code
-});
+playerInstance.setup({ /* player setup code */ });
+
 playerInstance.on('ready', function() {
     pixeltracker(playerInstance, {
         pixel: 'http://your-custom-pixel-server.com/pixel.jpg'
@@ -18,9 +17,8 @@ playerInstance.on('ready', function() {
 ### Advanced Usage
 ```
 var playerInstance = jwplayer("player");
-playerInstance.setup({
-    // player setup code
-});
+playerInstance.setup({ /* player setup code */ });
+
 playerInstance.on('ready', function() {
     pixeltracker(playerInstance, {
         debug: true,
