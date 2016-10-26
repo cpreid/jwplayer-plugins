@@ -34,6 +34,7 @@
         var user_config = user_config || {};
         var default_config = {
             evts: ['play', 'pause', 'stop', 'ready', 'quartiles', 'complete'],
+            metrics: [],
             alias: {evts: {}, metrics: {}}
         }
         var config = merge(default_config, user_config);        
@@ -113,9 +114,9 @@
                 metric_evt_val         = get_alias('evts', evt_name),
                 metric_evt_transformed = transform(metric_evt_name, metric_evt_val);
             qstring.push(metric_evt_transformed.key + '=' + metric_evt_transformed.val);
-            for(m in metrics) {
-                var metric_name  = get_alias('metrics', m),
-                    metric_value = get_metric_value(m),
+            for(var idx = 0; idx < config.metrics.length; idx++) {
+                var metric_name  = get_alias('metrics', config.metrics[idx]),
+                    metric_value = get_metric_value(config.metrics[idx]),
                     transformed  = transform(metric_name, metric_value, evt_name);                
                 qstring.push(transformed.key + '=' + transformed.val);
             }
@@ -136,6 +137,11 @@
         };
 
         var init = function() {
+            // track all possibly metric by default            
+            if(!config.metrics || !config.metrics.length) {
+                config.metrics = Object.keys(metrics);
+            }
+
             // bind all standard player events
             [].forEach.call(config.evts || [], function(evt_name) {
                 if(evt_name in bind_custom_evts) {
