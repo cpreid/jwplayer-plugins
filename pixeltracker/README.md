@@ -20,10 +20,8 @@
 var playerInstance = jwplayer("player");
 playerInstance.setup({ /* player setup code */ });
 
-playerInstance.on('ready', function() {
-    pixeltracker(playerInstance, {
-        pixel: 'http://your-custom-pixel-server.com/pixel.jpg'
-    });
+pixeltracker(playerInstance, {
+    pixel: 'http://your-custom-pixel-server.com/pixel.jpg'
 });
 ```
 
@@ -32,34 +30,32 @@ playerInstance.on('ready', function() {
 var playerInstance = jwplayer("player");
 playerInstance.setup({ /* player setup code */ });
 
-playerInstance.on('ready', function() {
-    pixeltracker(playerInstance, {
-        debug: true,
-        pixel: 'http://your-custom-pixel-server.com/pixel.jpg',
-        evts: ['play', 'pause', 'quartiles'],
-        alias: {
-            evts: {
-                ready : 'init',
-                seek  : 'skipto'
-            },
-            metrics: {
-                muted    : 'muted-alias',
-                duration : 'dur'
-            }
+pixeltracker(playerInstance, {
+    debug: true,
+    pixel: 'http://your-custom-pixel-server.com/pixel.jpg',
+    evts: ['play', 'pause', 'quartiles'],
+    alias: {
+        evts: {
+            ready : 'init',
+            seek  : 'skipto'
         },
-        addMetrics: function(evt_name) {
-            return [{key: 'player', val: 'jwplayer'}];
-        },
-        transformMetric: function(metric_name, metric_value, evt_name) {
-            // transform the 'event' key to 'evt'
-            if(metric_name == 'event') metric_name = 'evt';
-            
-            // transform boolean values to 1 or 0
-            if(metric_value === false) metric_value = '0';
-            if(metric_value === true) metric_value = '1';
-            return {key: metric_name, val: metric_value};
+        metrics: {
+            muted    : 'muted-alias',
+            duration : 'dur'
         }
-    });
+    },
+    addMetrics: function(evt_name) {
+        return [{key: 'player', val: 'jwplayer'}];
+    },
+    transformMetric: function(metric_name, metric_value, evt_name) {
+        // transform the 'event' key to 'evt'
+        if(metric_name == 'event') metric_name = 'evt';
+
+        // transform boolean values to 1 or 0
+        if(metric_value === false) metric_value = '0';
+        if(metric_value === true) metric_value = '1';
+        return {key: metric_name, val: metric_value};
+    }
 });
 ```
 
