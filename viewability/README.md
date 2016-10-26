@@ -9,7 +9,7 @@ jwplayer("player").setup({
     plugins: {
         'viewability.js': {
             'onUpdate': function(evt) {
-                // evt => {visible: xx.xx}
+                // evt => {visible: {x: xx.xx, y: yy.yy}
             }
         }
     }
