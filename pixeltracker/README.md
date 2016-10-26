@@ -2,6 +2,16 @@
 
 > Allows user to 'drop a pixel' into the player to track playback/user metrics at various playback events
 
+### Basic Usage
+```
+var playerInstance = jwplayer("player");
+playerInstance.setup({ /* player setup code */ });
+
+pixeltracker(playerInstance, {
+    pixel: 'http://your-custom-pixel-server.com/pixel.jpg'
+});
+```
+
 ### Metrics tracked
 | Metric     | type   | details                                                    |
 |------------|--------|------------------------------------------------------------|
@@ -14,16 +24,6 @@
 | state      | string | current status of player: idle, buffering, playing, paused |
 | volume     | int    | volume of player, 1-100                                    |
 | width      | str    | pixel height of player, ie, 720px                          |
-
-### Basic Usage
-```
-var playerInstance = jwplayer("player");
-playerInstance.setup({ /* player setup code */ });
-
-pixeltracker(playerInstance, {
-    pixel: 'http://your-custom-pixel-server.com/pixel.jpg'
-});
-```
 
 ### Advanced Usage
 ```
