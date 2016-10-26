@@ -135,24 +135,29 @@
             (new Image).src = [config.pixel, '?', qstring].join('');          
         };
 
+        var init = function() {
+            // bind all standard player events
+            [].forEach.call(config.evts || [], function(evt_name) {
+                if(evt_name in bind_custom_evts) {
+                    bind_custom_evts[evt_name]();
+                }
+                else {
+                    player.on(evt_name, function(evt) {
+                        track(evt.type)
+                    });
+                }
+            });
+            track('ready');            
+        }
+
+        log(config);
         if(!config.pixel) {
             throw 'Must provide a pixel.';
         }
+        else {
+            player.on('ready', init);    
+        }        
 
-        // bind all standard player events
-        [].forEach.call(config.evts || [], function(evt_name) {
-            if(evt_name in bind_custom_evts) {
-                bind_custom_evts[evt_name]();
-            }
-            else {
-                player.on(evt_name, function(evt) {
-                    track(evt.type)
-                });
-            }
-        });
-
-        track('ready');
-        log(config);
     }
 
     window.pixeltracker = pixeltracker;
