@@ -1,7 +1,10 @@
 (function() {
 
     var Overlay = function(player) {
-        var overlay = document.createElement('div');     
+        var overlay = document.createElement('div'),
+            addOverlay = function() {
+                player.getContainer().appendChild(overlay);
+            }
 
         // any element with class 'jwoverlay-close' will close the overlay
         overlay.addEventListener('click', function(evt) {
@@ -46,6 +49,12 @@
                 overlay.innerHTML     =  '';        
                 overlay.className     = 'jwoverlay';
                 overlay.style.display = 'none';      
+                if(player.getState() && player.getContainer() && player.getContainer().className.indexOf('jwplayer') > -1) {                                
+                    addOverlay(); // player was already `ready` when jwoverlay(playerInstance); was called
+                }
+                else {                    
+                    player.on('ready', addOverlay); // wait for player readiness
+                }
                 return api;          
             },
             elt: function() {
@@ -61,10 +70,7 @@
     window.jwoverlay = function(_player) {
         var overlay = Overlay(_player);        
         // attach overlay object to player instance
-        _player.jwoverlay = overlay;
-        _player.on('ready', function() {
-            _player.getContainer().appendChild(overlay.elt());
-        });
+        _player.jwoverlay = overlay;                
     }    
 
 })();
